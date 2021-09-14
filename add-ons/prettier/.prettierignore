@@ -1,0 +1,9 @@
+*.html
+*.json
+*.toml
+
+.gitignore
+.prettierignore
+.vscode
+
+node_modules
