@@ -29,15 +29,34 @@ const questions = [
     }
 ];
 
+function isFile(filePath: string) {
+    return fs.lstatSync(filePath).isFile();
+}
+
+function isDirectory(filePath: string) {
+    return fs.lstatSync(filePath).isDirectory();
+}
+
 function generateTemplate(template: string, dir: string): void {
     const templatePath = path.join('.', 'templates', template);
-    const files = fs.readdirSync(templatePath);
+    const readData = fs.readdirSync(templatePath);
 
-    fs.mkdirSync(path.join(dir, 'src'));
+    for(const entity of readData) {
+        if(isFile(path.join(templatePath, entity))) {
+            fs.readFile(path.join(templatePath, entity), 'utf8', (e, d) => {
+                if(e) throw e;
+                fs.writeFileSync(path.join(dir, entity), d);
+            })
 
-    for(const file of files) {
-        const data = fs.readFileSync(path.join(templatePath, file), 'utf8');
-        fs.writeFileSync(path.join(dir, 'src', file), data);
+            continue;
+        }
+
+        // if isDirectory(entity)
+        fs.mkdir(path.join(dir, entity), (e) => {
+            if(e) throw e;
+            
+            generateTemplate(path.join(template, entity), path.join(dir, entity));
+        });
     }
 }
 
@@ -54,7 +73,6 @@ function generateAddOns(addOns: string[] | string, dir: string): void {
 }
 
 inquirer.prompt(questions)
-// @ts-ignore
 .then((answers) => {
     console.log(chalk.green("\nGenerating project...\n"))
     const a = answers as { [key: string]: string };

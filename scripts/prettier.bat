@@ -1,0 +1,1 @@
+npm ci && npm install --global --save-dev prettier

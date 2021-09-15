@@ -1,1 +1,1 @@
-{"version":2,"languages":{"nodejs-npm":{"specfileHash":"d2a5f6fac904b02b943cad6c7ccebac1","lockfileHash":"58be34a587ba1f3191234b76e4f3a05b","guessedImports":["three","inquirer","chalk"],"guessedImportsHash":"dd03d4328324793fdc5aad1f7df715a0"}}}
+{"version":2,"languages":{"nodejs-npm":{"specfileHash":"10b0d502f9f185aeb1bc6dd5e2b48cf9","lockfileHash":"d3e0337d98de6ccd297b689f2f5f6e99","guessedImports":["three","inquirer","express","chalk","dotenv"],"guessedImportsHash":"03abb4fa1c2df4fcb5e54592be338026"}}}
